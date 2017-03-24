@@ -1,0 +1,10 @@
+---
+galaxy_info:
+  author: Nicholas Fisher
+  description: Install JDK
+  license: MIT
+  platforms:
+    - name: Ubuntu
+      versions:
+        - xenial
+  min_ansible_version: 2.2
