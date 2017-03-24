@@ -1,0 +1,8 @@
+---
+- set_fact:
+    java: "{{ java | combine( { 'real_home': java.install_dir + '/' + java.version } ) }}"
+
+- include: install.yml
+  when: java.source_url is defined
+  tags:
+    - install

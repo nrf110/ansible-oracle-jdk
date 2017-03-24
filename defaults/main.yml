@@ -1,0 +1,8 @@
+java:
+  version: 'jdk1.8.0_72'
+  install_dir: '/usr/share/java'
+  temp_dir: '/tmp'
+  archive: 'jdk-8u72-linux-x64.tar.gz'
+  source_url: 'http://download.oracle.com/otn-pub/java/jdk/8u72-b15/'
+  alternative: '/usr/bin/java'
+  home: '/usr/lib/java'
