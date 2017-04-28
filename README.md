@@ -7,10 +7,9 @@ Installs Oracle JDK on Ubuntu 16.04 (may work on other versions, but not tested)
 ```
 ---
 - hosts: all
-  roles: 
+  roles:
     - role: ansible-oracle-jdk
-      java:
-        temp_dir: '/opt'
+      java_temp_dir: '/opt'
 ```
 
 Requirements
@@ -20,16 +19,16 @@ Requirements
 Variables
 ---------
 ```
-# NOTE: This role uses configuration hash instead of namespacing keys.  Overriding values will require either using set_fact with the combine filter, or setting `hash_behiavor = merge` in ansible.cfg
-java:
-  home: '/usr/lib/java'
-  alternative: '/usr/bin/java'
-  version: 'jdk1.8.0_72'
-  archive: 'jdk-8u72-linux-x64.tar.gz'
-  source_url: 'http://download.oracle.com/otn-pub/java/jdk/8u72-b15'
+java_version: 'jdk1.8.0_72'
+java_install_dir: '/usr/share/java'
+java_temp_dir: '/tmp'
+java_archive: 'jdk-8u72-linux-x64.tar.gz'
+java_source_url: 'http://download.oracle.com/otn-pub/java/jdk/8u72-b15'
+java_alternative: '/usr/bin/java'
+java_home: '/usr/lib/java'
+java_real_home: "{{ java_install_dir }}/{{ java_version }}"
 ```
 
 Dependencies
 ------------
 None
-

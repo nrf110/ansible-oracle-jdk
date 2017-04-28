@@ -1,7 +1,7 @@
 ---
 - name: Create java directory
   file:
-    path: "{{ java.install_dir }}"
+    path: "{{ java_install_dir }}"
     state: directory
     mode: 0755
     owner: root
@@ -9,30 +9,30 @@
 
 - name: Download JDK tarball
   get_url:
-    url: "{{ java.source_url }}/{{ java.archive }}"
-    dest: "{{ java.temp_dir }}"
+    url: "{{ java_source_url }}/{{ java_archive }}"
+    dest: "{{ java_temp_dir }}"
     headers: "Cookie:gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie"
 
 - name: Unpack JDK tarball
   unarchive:
-    src: "{{ java.temp_dir }}/{{ java.archive }}"
-    dest: "{{ java.install_dir }}"
+    src: "{{ java_temp_dir }}/{{ java_archive }}"
+    dest: "{{ java_install_dir }}"
     remote_src: yes
     owner: root
     group: root
-    creates: "{{ java.real_home }}"
+    creates: "{{ java_real_home }}"
 
 - name: Install Alternatives
   alternatives:
     name: java-home-link
-    link: "{{ java.home }}"
-    path: "{{ java.real_home }}"
+    link: "{{ java_home }}"
+    path: "{{ java_real_home }}"
     priority: 30
 
 - name: Symlink Java
   file:
     dest: /usr/bin/java
-    src: "{{ java.real_home }}/bin/java"
+    src: "{{ java_real_home }}/bin/java"
     state: link
     owner: root
     group: root

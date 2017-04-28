@@ -1,11 +1,3 @@
 ---
-- set_fact:
-    java: "{{ java | combine( { 'real_home': java.install_dir + '/' + java.version } ) }}"
-  when: java.real_home is undefined
-  tags:
-    - always
-
 - include: install.yml
-  when: java.source_url is defined
-  tags:
-    - install
+  tags: [install]
