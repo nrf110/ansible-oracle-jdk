@@ -1,4 +1,9 @@
 ---
+- name: Install Unzip
+  apt:
+    name: unzip
+    state: present
+
 - name: Create java directory
   file:
     path: "{{ java_install_dir }}"
@@ -8,10 +13,17 @@
     group: root
 
 - name: Download JDK tarball
-  get_url:
-    url: "{{ java_source_url }}/{{ java_archive }}"
-    dest: "{{ java_temp_dir }}"
-    headers: "Cookie:gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie"
+  local_action: get_url url="{{ java_remote_source_url }}/{{ java_archive }}" dest="{{ java_staging_dir }}/{{ java_archive }}"
+  become: False
+  run_once: True
+
+- name: Copy JDK tarball
+  copy:
+    src: "{{ java_staging_dir }}/{{ java_archive }}"
+    dest: "{{ java_temp_dir }}/{{ java_archive }}"
+    owner: root
+    group: root
+    mode: 0755
 
 - name: Unpack JDK tarball
   unarchive:
